@@ -10,7 +10,6 @@ cache:
 build-job:
   stage: build
   script:
-    - cd auth
     - /gradlew auth:bootJar
   only:
     - master
