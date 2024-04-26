@@ -1,11 +1,11 @@
 package ru.ifmo.facade.controller
 
-import ru.ifmo.commons.dto.MessageDto
-import ru.ifmo.commons.dto.SendMessageDto
 import ru.ifmo.facade.client.ChatClient
 import lombok.RequiredArgsConstructor
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
+import ru.ifmo.ru.ifmo.commons.dto.MessageDto
+import ru.ifmo.ru.ifmo.commons.dto.SendMessageDto
 
 
 @RestController

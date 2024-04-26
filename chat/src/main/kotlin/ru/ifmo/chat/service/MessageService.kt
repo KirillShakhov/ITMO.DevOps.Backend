@@ -1,6 +1,5 @@
 package ru.ifmo.chat.service
 
-import dto.MessageDto
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import ru.ifmo.chat.model.Message

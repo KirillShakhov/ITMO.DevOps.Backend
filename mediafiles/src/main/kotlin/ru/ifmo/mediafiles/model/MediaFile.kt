@@ -3,6 +3,7 @@ package ru.ifmo.mediafiles.model
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
+import ru.ifmo.ru.ifmo.commons.dto.MediaType
 import java.util.*
 
 

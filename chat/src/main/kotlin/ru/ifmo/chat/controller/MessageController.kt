@@ -1,12 +1,10 @@
 package ru.ifmo.chat.controller
 
-import dto.MessageDto
-import dto.SendMessageDto
-import org.apache.logging.log4j.message.Message
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import ru.ifmo.chat.service.MessageService
+import ru.ifmo.ru.ifmo.commons.dto.MessageDto
+import ru.ifmo.ru.ifmo.commons.dto.SendMessageDto
 
 @RestController
 @RequestMapping("/messages")

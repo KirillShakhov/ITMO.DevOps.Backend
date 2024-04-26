@@ -3,8 +3,8 @@ package ru.ifmo.mediafiles.controller
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import ru.ifmo.mediafiles.dto.MediaFileUpload
 import ru.ifmo.mediafiles.service.MediaFileService
+import ru.ifmo.ru.ifmo.commons.dto.MediaFileUpload
 
 @RestController
 @RequestMapping("/mediafiles")
