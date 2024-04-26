@@ -11,9 +11,7 @@ build-job:
   stage: build
   script:
     - cd auth
-    - ./gradlew bootJar
-    - cd build\libs
-    - java -jar .\auth-0.0.1-SNAPSHOT.jar
+    - ./gradlew auth:bootJar
   artifacts:
     paths:
       - build/libs/*.jar
@@ -24,7 +22,7 @@ build-job:
 test-job:
   stage: test
   script:
-    - echo "hello"
+    - ./gradlew auth:test
   only:
     - master
 
