@@ -13,13 +13,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import ru.ifmo.facade.security.JwtAuthenticationEntryPoint
 import ru.ifmo.facade.security.JwtAuthenticationFilter
 
-
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-class WebSecurityConfiguration {
-    private val jwtAuthenticationEntryPoint: JwtAuthenticationEntryPoint? = null
-    private val jwtAuthenticationFilter: JwtAuthenticationFilter? = null
+class WebSecurityConfiguration(
+    private val jwtAuthenticationEntryPoint: JwtAuthenticationEntryPoint,
+    private val jwtAuthenticationFilter: JwtAuthenticationFilter
+) {
 
     @Bean
     @Throws(Exception::class)
@@ -34,8 +34,7 @@ class WebSecurityConfiguration {
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
             .authorizeRequests()
-            .antMatchers("/api/v1/auth/**").permitAll()
-            .antMatchers("/api/v1/users/add").permitAll()
+            .antMatchers("/api/v1/auth/**", "/api/v1/users/add").permitAll() // streamlined the permitAll() matcher
             .anyRequest().authenticated()
             .and()
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter::class.java)
