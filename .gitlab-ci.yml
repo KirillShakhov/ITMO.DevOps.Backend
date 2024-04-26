@@ -10,14 +10,14 @@ cache:
 build-job:
   stage: build
   script:
-    - /gradlew auth:bootJar
+    - gradlew auth:bootJar
   only:
     - master
 
 test-job:
   stage: test
   script:
-    - /gradlew auth:test
+    - gradlew auth:test
   only:
     - master
 
