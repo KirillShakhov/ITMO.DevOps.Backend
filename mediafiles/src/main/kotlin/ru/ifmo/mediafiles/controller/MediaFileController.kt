@@ -11,14 +11,14 @@ import ru.ifmo.mediafiles.service.MediaFileService
 class MediaFileController @Autowired constructor(
     private val mediaFileService: MediaFileService
 ) {
-    @GetMapping("/user/{username}")
-    fun getMediaFileByUsername(@PathVariable username: String): ResponseEntity<*> {
+    @GetMapping("/")
+    fun getMediaFileByUsername(@RequestHeader("Username") username: String): ResponseEntity<*> {
         return ResponseEntity.ok(mediaFileService.findMediaFileByUsername(username))
     }
 
     @PostMapping("/")
-    fun saveMediaFile(@RequestBody mediaFileUpload: MediaFileUpload): ResponseEntity<*> {
-        val savedMediaFile = mediaFileService.saveMediaFile(mediaFileUpload)
+    fun saveMediaFile(@RequestHeader("Username") username: String, @RequestBody mediaFileUpload: MediaFileUpload): ResponseEntity<*> {
+        val savedMediaFile = mediaFileService.saveMediaFile(username, mediaFileUpload.type, mediaFileUpload.base64)
         return ResponseEntity.ok(savedMediaFile)
     }
 }
