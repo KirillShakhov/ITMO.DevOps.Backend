@@ -12,7 +12,7 @@ class MessageController @Autowired constructor(
     private val messageService: MessageService
 ) {
     @GetMapping("/")
-    fun getMediaFileByUsername(@RequestHeader("Username") username: String): ResponseEntity<*> {
+    fun getMessages(@RequestHeader("Username") username: String): ResponseEntity<*> {
         return ResponseEntity.ok(messageService.findMediaFileByUsername(username))
     }
 

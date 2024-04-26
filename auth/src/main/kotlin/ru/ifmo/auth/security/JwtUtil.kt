@@ -2,6 +2,7 @@ package ru.ifmo.auth.security
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.stereotype.Service
 import java.util.*
@@ -9,7 +10,8 @@ import java.util.function.Function
 
 @Service
 class JwtUtil {
-    private val SECRET_KEY = "77397A24432646294A404E635266556A586E327235753778214125442A472D4B"
+    @Value("\${jwt.secret}")
+    private val jwtSecret: String? = null
     private val invalidatedTokens: MutableSet<String> = HashSet()
 
     fun extractUsername(token: String?): String {
@@ -26,7 +28,7 @@ class JwtUtil {
     }
 
     private fun extractAllClaims(token: String?): Claims {
-        return Jwts.parserBuilder().setSigningKey(SECRET_KEY).build().parseClaimsJws(token).body
+        return Jwts.parserBuilder().setSigningKey(jwtSecret).build().parseClaimsJws(token).body
     }
 
     private fun isTokenExpired(token: String?): Boolean {
@@ -41,7 +43,7 @@ class JwtUtil {
     private fun createToken(claims: Map<String, Any?>, subject: String): String {
         return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(Date(System.currentTimeMillis()))
             .setExpiration(Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
-            .signWith(SignatureAlgorithm.HS256, SECRET_KEY).compact()
+            .signWith(SignatureAlgorithm.HS256, jwtSecret).compact()
     }
 
     fun validateToken(token: String?, userDetails: UserDetails): Boolean {
