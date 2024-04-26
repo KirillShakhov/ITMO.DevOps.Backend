@@ -2,8 +2,8 @@ package ru.ifmo.facade.client
 
 import org.springframework.cloud.openfeign.FeignClient
 import org.springframework.web.bind.annotation.*
-import ru.ifmo.ru.ifmo.commons.dto.MessageDto
-import ru.ifmo.ru.ifmo.commons.dto.SendMessageDto
+import ru.ifmo.commons.dto.MessageDto
+import ru.ifmo.commons.dto.SendMessageDto
 
 
 @FeignClient("chat")

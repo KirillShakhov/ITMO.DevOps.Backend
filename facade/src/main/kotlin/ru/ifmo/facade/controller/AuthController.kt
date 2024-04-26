@@ -5,8 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import ru.ifmo.facade.client.AuthClient
-import ru.ifmo.ru.ifmo.commons.dto.LoginRequest
-import ru.ifmo.ru.ifmo.commons.dto.RegisterDto
+import ru.ifmo.commons.dto.LoginRequest
+import ru.ifmo.commons.dto.RegisterDto
 
 
 @RestController

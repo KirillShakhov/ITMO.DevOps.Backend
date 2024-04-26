@@ -12,10 +12,10 @@ import ru.ifmo.auth.model.UserAuth
 import ru.ifmo.auth.repository.UserRepository
 import ru.ifmo.auth.security.JwtUtil
 import ru.ifmo.auth.service.AuthenticationService
-import ru.ifmo.ru.ifmo.commons.dto.ApiResponse
-import ru.ifmo.ru.ifmo.commons.dto.AuthenticationResponse
-import ru.ifmo.ru.ifmo.commons.dto.LoginRequest
-import ru.ifmo.ru.ifmo.commons.dto.RegisterDto
+import ru.ifmo.commons.dto.ApiResponse
+import ru.ifmo.commons.dto.AuthenticationResponse
+import ru.ifmo.commons.dto.LoginRequest
+import ru.ifmo.commons.dto.RegisterDto
 
 @RestController
 class AuthenticationController {

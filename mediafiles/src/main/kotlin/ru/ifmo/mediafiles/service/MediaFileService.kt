@@ -3,7 +3,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import ru.ifmo.mediafiles.model.MediaFile
 import ru.ifmo.mediafiles.repository.MediaFileRepository
-import ru.ifmo.ru.ifmo.commons.dto.MediaType
+import ru.ifmo.commons.dto.MediaType
 
 
 @Service
