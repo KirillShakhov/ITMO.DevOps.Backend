@@ -25,6 +25,8 @@ test-job:
   stage: test
   script:
     - ./gradlew auth:test
+  needs:
+    ["build-job"]
   only:
     - master
 
