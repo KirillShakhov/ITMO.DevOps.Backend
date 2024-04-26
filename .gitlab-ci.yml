@@ -1,0 +1,53 @@
+stages:
+  - build
+  - test
+
+variables:
+
+
+default:
+  image:
+  tags:
+
+  cache:
+      paths:
+
+
+build_first_service:
+  stage: build
+  script:
+
+  artifacts:
+    paths:
+
+  only:
+
+
+build_second_service:
+  stage: build
+  script:
+
+  artifacts:
+    paths:
+
+  only:
+
+
+test_first_service:
+  stage: test
+  script:
+
+  needs: 
+
+  only:
+
+
+test_second_service:
+  stage: test
+  script:
+
+  needs: 
+
+  only:
+    - master
+
