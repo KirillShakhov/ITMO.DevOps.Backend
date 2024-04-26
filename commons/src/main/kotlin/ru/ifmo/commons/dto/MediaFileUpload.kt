@@ -1,4 +1,4 @@
-package ru.ifmo.commons.dto
+package ru.ifmo.ru.ifmo.commons.dto
 
 
 data class MediaFileUpload(

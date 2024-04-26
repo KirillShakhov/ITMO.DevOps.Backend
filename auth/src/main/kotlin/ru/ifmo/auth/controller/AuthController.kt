@@ -1,8 +1,4 @@
 package ru.ifmo.auth.controller
-import ru.ifmo.commons.dto.ApiResponse
-import ru.ifmo.commons.dto.AuthenticationResponse
-import ru.ifmo.commons.dto.LoginRequest
-import ru.ifmo.commons.dto.RegisterDto
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpHeaders
 import org.springframework.http.ResponseEntity
@@ -16,6 +12,10 @@ import ru.ifmo.auth.model.UserAuth
 import ru.ifmo.auth.repository.UserRepository
 import ru.ifmo.auth.security.JwtUtil
 import ru.ifmo.auth.service.AuthenticationService
+import ru.ifmo.ru.ifmo.commons.dto.ApiResponse
+import ru.ifmo.ru.ifmo.commons.dto.AuthenticationResponse
+import ru.ifmo.ru.ifmo.commons.dto.LoginRequest
+import ru.ifmo.ru.ifmo.commons.dto.RegisterDto
 
 @RestController
 class AuthenticationController {
