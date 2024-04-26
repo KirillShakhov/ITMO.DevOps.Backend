@@ -14,8 +14,8 @@ class AuthenticationService : UserDetailsService {
     var jwtUserRepository: UserRepository? = null
 
     @Throws(UsernameNotFoundException::class)
-    override fun loadUserByUsername(email: String): UserDetails? {
-        val user: UserAuth = jwtUserRepository!!.findUserByEmail(email)
-        return org.springframework.security.core.userdetails.User(user.email, user.password, ArrayList())
+    override fun loadUserByUsername(username: String): UserDetails? {
+        val user: UserAuth = jwtUserRepository!!.findUserByUsername(username)
+        return org.springframework.security.core.userdetails.User(user.username, user.password, ArrayList())
     }
 }

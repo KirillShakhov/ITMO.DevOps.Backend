@@ -82,7 +82,7 @@ class AuthenticationController {
         // Creating user's account
         val jwtUser = UserAuth(null, registerDto.username, passwordEncoder.encode(registerDto.password))
 
-        println("jwtUser >> " + jwtUser.email)
+        println("jwtUser >> " + jwtUser.username)
         jwtUser.let { userRepository.save(it) }
         return ResponseEntity.ok<Any>(ApiResponse(true, "User registered successfully"))
     }

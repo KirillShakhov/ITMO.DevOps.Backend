@@ -6,6 +6,6 @@ import org.springframework.data.mongodb.core.mapping.Document
 data class UserAuth(
     @Id
     val id: String?,
-    var email: String,
+    var username: String,
     var password: String,
 )
