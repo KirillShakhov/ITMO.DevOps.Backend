@@ -1,33 +1,26 @@
 package ru.ifmo.facade.controller
 
+import dto.MessageDto
+import dto.SendMessageDto
 import ru.ifmo.facade.client.ChatClient
 import lombok.RequiredArgsConstructor
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 
 
 @RestController
-@RequestMapping("/api/v1/auth")
+@RequestMapping("/messages")
 @RequiredArgsConstructor
-class ChatController {
-    private val chatClient: ChatClient? = null
-
-    @PostMapping("/login")
-    fun login(@Valid @RequestBody credentialsDto: CredentialsDto?): TokenDto {
-        return authClient.login(credentialsDto)
+class ChatController @Autowired constructor(
+    private val chatClient: ChatClient
+) {
+    @GetMapping("/")
+    fun getMessages(): List<MessageDto> {
+        return chatClient.getMessages()
     }
 
-    @PostMapping("/validateToken")
-    fun validateToken(@RequestParam token: String?): Boolean {
-        return authClient.validateToken(token)
-    }
-
-    @PostMapping("/token")
-    fun token(@RequestBody tokenDto: TokenDto?): TokenDto {
-        return chatClient.token(tokenDto)
-    }
-
-    @PostMapping("/refresh")
-    fun refresh(@Valid @RequestBody tokenDto: TokenDto?): TokenDto {
-        return authClient.refresh(tokenDto)
+    @PostMapping("/")
+    fun sendMessage(@RequestBody sendMessageDto: SendMessageDto): MessageDto {
+        return chatClient.sendMessage(sendMessageDto)
     }
 }
