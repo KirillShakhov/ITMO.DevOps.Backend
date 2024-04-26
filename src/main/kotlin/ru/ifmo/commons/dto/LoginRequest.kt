@@ -1,6 +1,6 @@
-package dto
+package ru.ifmo.commons.dto
 
-data class RegisterDto(
+data class LoginRequest(
     var username: String,
     var password: String
 )

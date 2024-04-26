@@ -1,6 +1,6 @@
-plugins {
-    id 'org.gradle.toolchains.foojay-resolver-convention' version '0.5.0'
-}
 rootProject.name = 'devops-lab1'
-include 'commons'
-
+include 'auth'
+include 'chat'
+include 'eureka'
+include 'facade'
+include 'mediafiles'

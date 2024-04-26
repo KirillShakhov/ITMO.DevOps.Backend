@@ -1,4 +1,4 @@
-package dto
+package ru.ifmo.commons.dto
 
 data class ApiResponse(
     var success: Boolean,

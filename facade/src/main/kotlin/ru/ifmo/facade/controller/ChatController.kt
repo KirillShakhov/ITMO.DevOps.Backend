@@ -1,7 +1,7 @@
 package ru.ifmo.facade.controller
 
-import dto.MessageDto
-import dto.SendMessageDto
+import ru.ifmo.commons.dto.MessageDto
+import ru.ifmo.commons.dto.SendMessageDto
 import ru.ifmo.facade.client.ChatClient
 import lombok.RequiredArgsConstructor
 import org.springframework.beans.factory.annotation.Autowired

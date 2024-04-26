@@ -1,8 +1,8 @@
 package ru.ifmo.auth.controller
-import dto.ApiResponse
-import dto.AuthenticationResponse
-import dto.LoginRequest
-import dto.RegisterDto
+import ru.ifmo.commons.dto.ApiResponse
+import ru.ifmo.commons.dto.AuthenticationResponse
+import ru.ifmo.commons.dto.LoginRequest
+import ru.ifmo.commons.dto.RegisterDto
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpHeaders
 import org.springframework.http.ResponseEntity
