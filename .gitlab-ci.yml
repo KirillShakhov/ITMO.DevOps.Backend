@@ -1,53 +1,31 @@
 stages:
   - build
-  - test
-
-variables:
 
 
-default:
-  image:
-  tags:
+before_script:
+  #  - echo `pwd` # debug
+  #  - echo "$CI_BUILD_NAME, $CI_BUILD_REF_NAME $CI_BUILD_STAGE" # debug
+  - export GRADLE_USER_HOME=`pwd`/.gradle
 
-  cache:
-      paths:
+cache:
+  paths:
+    - .gradle/wrapper
+    - .gradle/caches
 
-
-build_first_service:
+build:
   stage: build
   script:
-
+    - cd auth
+    - ./gradlew bootJar
+    - cd build\libs
+    - java -jar .\auth-0.0.1-SNAPSHOT.jar
   artifacts:
     paths:
-
-  only:
-
-
-build_second_service:
-  stage: build
-  script:
-
-  artifacts:
-    paths:
-
-  only:
-
-
-test_first_service:
-  stage: test
-  script:
-
-  needs: 
-
-  only:
-
-
-test_second_service:
-  stage: test
-  script:
-
-  needs: 
-
+      - build/libs/*.jar
+    expire_in: 1 week
   only:
     - master
+
+after_script:
+  - echo "End CI"
 
