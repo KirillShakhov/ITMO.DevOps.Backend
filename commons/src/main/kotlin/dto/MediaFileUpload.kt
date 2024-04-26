@@ -1,6 +1,5 @@
-package ru.ifmo.mediafiles.dto
+package dto
 
-import ru.ifmo.mediafiles.model.MediaType
 
 data class MediaFileUpload(
     var type: MediaType,

@@ -1,4 +1,4 @@
-package ru.ifmo.auth.dto
+package dto
 
 data class AuthenticationResponse(
     var username: String

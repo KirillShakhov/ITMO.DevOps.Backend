@@ -1,4 +1,8 @@
 package ru.ifmo.auth.controller
+import dto.ApiResponse
+import dto.AuthenticationResponse
+import dto.LoginRequest
+import dto.RegisterDto
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpHeaders
 import org.springframework.http.ResponseEntity
@@ -8,10 +12,6 @@ import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.web.bind.annotation.*
-import ru.ifmo.auth.dto.ApiResponse
-import ru.ifmo.auth.dto.AuthenticationResponse
-import ru.ifmo.auth.dto.LoginRequest
-import ru.ifmo.auth.dto.RegisterDto
 import ru.ifmo.auth.model.UserAuth
 import ru.ifmo.auth.repository.UserRepository
 import ru.ifmo.auth.security.JwtUtil

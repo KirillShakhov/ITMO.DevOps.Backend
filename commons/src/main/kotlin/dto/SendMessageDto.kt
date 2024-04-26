@@ -1,4 +1,4 @@
-package ru.ifmo.chat.dto
+package dto
 
 
 data class SendMessageDto(

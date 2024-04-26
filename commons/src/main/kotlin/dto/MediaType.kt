@@ -1,4 +1,4 @@
-package ru.ifmo.mediafiles.model
+package dto
 
 enum class MediaType {
     Image,
