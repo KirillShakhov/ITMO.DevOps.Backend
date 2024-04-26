@@ -16,7 +16,7 @@ build-job:
     - ./gradlew auth:bootJar
   artifacts:
     paths:
-      - build/libs/*.jar
+      - auth/build/libs/*.jar
     expire_in: 1 week
   only:
     - master
