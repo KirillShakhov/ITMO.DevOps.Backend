@@ -10,7 +10,7 @@ cache:
     - .gradle/wrapper
     - .gradle/caches
 
-build-job:
+build-auth:
   stage: build
   script:
     - ./gradlew auth:bootJar
@@ -21,15 +21,94 @@ build-job:
   only:
     - master
 
-test-job:
+test-auth:
   stage: test
   script:
     - ./gradlew auth:test
   needs:
-    ["build-job"]
+    - build-auth
+  only:
+    - master
+
+build-chat:
+  stage: build
+  script:
+    - ./gradlew chat:bootJar
+  artifacts:
+    paths:
+      - chat/build/libs/*.jar
+    expire_in: 1 week
+  only:
+    - master
+
+test-chat:
+  stage: test
+  script:
+    - ./gradlew chat:test
+  needs:
+    - build-chat
+  only:
+    - master
+
+build-eureka:
+  stage: build
+  script:
+    - ./gradlew eureka:bootJar
+  artifacts:
+    paths:
+      - eureka/build/libs/*.jar
+    expire_in: 1 week
+  only:
+    - master
+
+test-eureka:
+  stage: test
+  script:
+    - ./gradlew eureka:test
+  needs:
+    - build-eureka
+  only:
+    - master
+
+build-facade:
+  stage: build
+  script:
+    - ./gradlew facade:bootJar
+  artifacts:
+    paths:
+      - facade/build/libs/*.jar
+    expire_in: 1 week
+  only:
+    - master
+
+test-facade:
+  stage: test
+  script:
+    - ./gradlew facade:test
+  needs:
+    - build-facade
+  only:
+    - master
+
+build-mediafiles:
+  stage: build
+  script:
+    - ./gradlew mediafiles:bootJar
+  artifacts:
+    paths:
+      - mediafiles/build/libs/*.jar
+    expire_in: 1 week
+  only:
+    - master
+
+test-mediafiles:
+  stage: test
+  script:
+    - ./gradlew mediafiles:test
+  needs:
+    - build-mediafiles
   only:
     - master
 
 after_script:
   - echo "End CI"
-
