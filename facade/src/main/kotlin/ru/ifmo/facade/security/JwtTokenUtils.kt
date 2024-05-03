@@ -9,13 +9,9 @@ import javax.servlet.http.HttpServletRequest
 @Component
 class JwtTokenUtils {
     fun tokenFromRequest(@NonNull request: HttpServletRequest): String? {
-        val header: String = request.getHeader(AUTHORIZATION)
-
-        if (StringUtils.hasText(header) && header.startsWith(TOKEN_PREFIX)) {
-            return header.substring(TOKEN_PREFIX.length)
-        }
-
-        return null
+        val header: String = request.getHeader(AUTHORIZATION) ?: return null
+        if (!StringUtils.hasText(header) || !header.startsWith(TOKEN_PREFIX)) return null
+        return header.substring(TOKEN_PREFIX.length)
     }
 
     companion object {

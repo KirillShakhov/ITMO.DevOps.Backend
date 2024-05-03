@@ -34,7 +34,7 @@ class WebSecurityConfiguration(
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
             .authorizeRequests()
-            .antMatchers("/api/v1/auth/**", "/api/v1/users/add").permitAll() // streamlined the permitAll() matcher
+            .antMatchers("/auth/**").permitAll()
             .anyRequest().authenticated()
             .and()
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter::class.java)

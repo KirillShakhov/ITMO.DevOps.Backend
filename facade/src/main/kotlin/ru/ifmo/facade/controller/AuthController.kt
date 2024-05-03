@@ -10,7 +10,7 @@ import ru.ifmo.commons.dto.RegisterDto
 
 
 @RestController
-@RequestMapping("/messages")
+@RequestMapping("/auth")
 @RequiredArgsConstructor
 class AuthController @Autowired constructor(
     private val authClient: AuthClient

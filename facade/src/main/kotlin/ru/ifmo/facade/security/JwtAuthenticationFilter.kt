@@ -16,9 +16,10 @@ import javax.servlet.http.HttpServletResponse
 
 @Component
 @RequiredArgsConstructor
-class JwtAuthenticationFilter : OncePerRequestFilter() {
-    private val jwtTokenProvider: JwtTokenProvider? = null
-    private val jwtTokenUtils: JwtTokenUtils? = null
+class JwtAuthenticationFilter(
+    private val jwtTokenProvider: JwtTokenProvider,
+    private val jwtTokenUtils: JwtTokenUtils
+) : OncePerRequestFilter() {
 
     companion object {
         private const val USERNAME_KEY = "Username"
@@ -31,7 +32,7 @@ class JwtAuthenticationFilter : OncePerRequestFilter() {
         response: HttpServletResponse,
         filterChain: FilterChain
     ) {
-        val token = jwtTokenUtils!!.tokenFromRequest(request)
+        val token = jwtTokenUtils.tokenFromRequest(request)
 
         if (token != null && request.getAttribute("username") == null && StringUtils.hasText(token) && jwtTokenProvider!!.validateToken(
                 token
