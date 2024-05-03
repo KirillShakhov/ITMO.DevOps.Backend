@@ -6,6 +6,7 @@ import ru.ifmo.auth.model.UserAuth
 
 @Repository
 interface UserRepository : MongoRepository<UserAuth, String> {
+    fun existsByUsername(username: String): Boolean
     fun findUserByUsername(username: String): UserAuth
     fun save(userAuth: UserAuth)
 }

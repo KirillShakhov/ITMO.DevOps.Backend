@@ -80,6 +80,9 @@ class AuthenticationController {
     @PostMapping("/signup")
     fun registerUser(@RequestBody registerDto: RegisterDto): ResponseEntity<*> {
         // Creating user's account
+        if (userRepository.existsByUsername(registerDto.username)){
+            return ResponseEntity.ok<Any>(ApiResponse(false, "User is already registered"))
+        }
         val jwtUser = UserAuth(null, registerDto.username, passwordEncoder.encode(registerDto.password))
 
         println("jwtUser >> " + jwtUser.username)
