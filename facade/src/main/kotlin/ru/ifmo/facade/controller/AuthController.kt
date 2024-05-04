@@ -9,6 +9,7 @@ import ru.ifmo.commons.dto.AuthenticationResponse
 import ru.ifmo.facade.client.AuthClient
 import ru.ifmo.commons.dto.LoginRequest
 import ru.ifmo.commons.dto.RegisterDto
+import javax.servlet.http.HttpServletResponse
 
 
 @RestController
@@ -20,7 +21,7 @@ class AuthController @Autowired constructor(
     @ResponseBody
     @PostMapping("/signin")
     fun authenticateUser(@RequestBody loginRequest: LoginRequest): AuthenticationResponse {
-        return authClient.authenticateUser(loginRequest)
+        return authClient.authenticateUser(loginRequest);
     }
 
     @ResponseBody

@@ -63,7 +63,7 @@ class AuthenticationController {
 
     @ResponseBody
     @PostMapping("/signin")
-    fun authenticateUser(@RequestBody loginRequest: LoginRequest, response: HttpServletResponse): AuthenticationResponse {
+    fun authenticateUser(@RequestBody loginRequest: LoginRequest): AuthenticationResponse {
         val authentication = authenticationManager.authenticate(
             UsernamePasswordAuthenticationToken(
                 loginRequest.username,
@@ -73,8 +73,7 @@ class AuthenticationController {
         SecurityContextHolder.getContext().authentication = authentication
         val userDetails: UserDetails = userDetailsService.loadUserByUsername(loginRequest.username)!!
         val jwt = jwtUtil.generateToken(userDetails)
-        response.setHeader("Authorization", jwt)
-        return AuthenticationResponse(loginRequest.username)
+        return AuthenticationResponse(loginRequest.username, jwt)
     }
 
     @ResponseBody
