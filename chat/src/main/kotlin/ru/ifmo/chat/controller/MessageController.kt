@@ -12,13 +12,13 @@ class MessageController @Autowired constructor(
     private val messageService: MessageService
 ) {
     @GetMapping("/")
-    fun getMessages(@RequestHeader("Username") username: String): List<MessageDto> {
+    fun getMessages(@RequestHeader username: String): List<MessageDto> {
         return messageService.findByUsername(username).map { message -> MessageDto(message.id, message.username, message.recipient, message.text, message.attachment, message.createdDate) }
     }
 
     @PostMapping("/")
     fun sendMessage(
-        @RequestHeader("Username") username: String,
+        @RequestHeader username: String,
         @RequestBody sendMessageDto: SendMessageDto
     ): MessageDto {
         val message = messageService.sendMessage(username, sendMessageDto.recipient, sendMessageDto.text, sendMessageDto.attachment)

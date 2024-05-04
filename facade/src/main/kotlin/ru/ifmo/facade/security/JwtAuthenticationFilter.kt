@@ -22,7 +22,7 @@ class JwtAuthenticationFilter(
 ) : OncePerRequestFilter() {
 
     companion object {
-        private const val USERNAME_KEY = "Username"
+        private const val USERNAME_KEY = "sub"
 
         private const val TOKEN_PREFIX = "Bearer "
     }
@@ -34,18 +34,18 @@ class JwtAuthenticationFilter(
     ) {
         val token = jwtTokenUtils.tokenFromRequest(request)
 
-        if (token != null && request.getAttribute("username") == null && StringUtils.hasText(token) && jwtTokenProvider!!.validateToken(
+        if (token != null && request.getAttribute("username") == null && StringUtils.hasText(token) && jwtTokenProvider.validateToken(
                 token
             )
         ) {
             val claims = jwtTokenProvider.extractAllClaims(token)
             val username = claims[USERNAME_KEY] as String?
+            val grantedAuthority = SimpleGrantedAuthority("ROLE_USER")
             val authentication = UsernamePasswordAuthenticationToken(
-                username, null, Collections.emptyList()
+                username, null, listOf(grantedAuthority)
             )
             authentication.details = WebAuthenticationDetailsSource().buildDetails(request)
             SecurityContextHolder.getContext().authentication = authentication
-            request.setAttribute("Username", username)
         }
         filterChain.doFilter(request, response)
     }
