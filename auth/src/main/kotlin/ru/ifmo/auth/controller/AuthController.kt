@@ -1,6 +1,7 @@
 package ru.ifmo.auth.controller
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpHeaders
+import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
@@ -16,6 +17,7 @@ import ru.ifmo.commons.dto.ApiResponse
 import ru.ifmo.commons.dto.AuthenticationResponse
 import ru.ifmo.commons.dto.LoginRequest
 import ru.ifmo.commons.dto.RegisterDto
+import javax.servlet.http.HttpServletResponse
 
 @RestController
 class AuthenticationController {
@@ -59,8 +61,9 @@ class AuthenticationController {
         return ResponseEntity.ok<Any>(AuthenticationResponse(jwt))
     }
 
+    @ResponseBody
     @PostMapping("/signin")
-    fun authenticateUser(@RequestBody loginRequest: LoginRequest): ResponseEntity<*> {
+    fun authenticateUser(@RequestBody loginRequest: LoginRequest, response: HttpServletResponse): AuthenticationResponse {
         val authentication = authenticationManager.authenticate(
             UsernamePasswordAuthenticationToken(
                 loginRequest.username,
@@ -70,24 +73,22 @@ class AuthenticationController {
         SecurityContextHolder.getContext().authentication = authentication
         val userDetails: UserDetails = userDetailsService.loadUserByUsername(loginRequest.username)!!
         val jwt = jwtUtil.generateToken(userDetails)
-        val responseBody = AuthenticationResponse(loginRequest.username)
-        val responseHeaders = HttpHeaders()
-        responseHeaders.add("Authorization", jwt)
-        return ResponseEntity.ok().headers(responseHeaders).body(responseBody)
+        response.setHeader("Authorization", jwt)
+        return AuthenticationResponse(loginRequest.username)
     }
 
-
+    @ResponseBody
     @PostMapping("/signup")
-    fun registerUser(@RequestBody registerDto: RegisterDto): ResponseEntity<*> {
+    fun registerUser(@RequestBody registerDto: RegisterDto): ApiResponse {
         // Creating user's account
         if (userRepository.existsByUsername(registerDto.username)){
-            return ResponseEntity.ok<Any>(ApiResponse(false, "User is already registered"))
+            return ApiResponse(false, "User is already registered")
         }
         val jwtUser = UserAuth(null, registerDto.username, passwordEncoder.encode(registerDto.password))
 
         println("jwtUser >> " + jwtUser.username)
         jwtUser.let { userRepository.save(it) }
-        return ResponseEntity.ok<Any>(ApiResponse(true, "User registered successfully"))
+        return ApiResponse(true, "User registered successfully")
     }
 
     @PostMapping("/logout-user")

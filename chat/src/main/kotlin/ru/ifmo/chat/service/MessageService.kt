@@ -10,8 +10,8 @@ import java.util.Date
 class MessageService @Autowired constructor(
     private val messageRepository: MessageRepository
 ) {
-    fun findMediaFileByUsername(username: String): List<Message> {
-        return messageRepository.findUserByUsername(username)
+    fun findByUsername(username: String): List<Message> {
+        return messageRepository.findByRecipientOrUsername(username, username)
     }
 
     fun sendMessage(username: String, recipient: String, text: String, attachment: Int?): Message {

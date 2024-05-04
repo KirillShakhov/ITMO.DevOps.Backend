@@ -13,7 +13,7 @@ class MessageController @Autowired constructor(
 ) {
     @GetMapping("/")
     fun getMessages(@RequestHeader("Username") username: String): List<MessageDto> {
-        return messageService.findMediaFileByUsername(username).map { message -> MessageDto(message.id, message.username, message.recipient, message.text, message.attachment, message.createdDate) }
+        return messageService.findByUsername(username).map { message -> MessageDto(message.id, message.username, message.recipient, message.text, message.attachment, message.createdDate) }
     }
 
     @PostMapping("/")

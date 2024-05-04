@@ -8,9 +8,9 @@ import ru.ifmo.commons.dto.SendMessageDto
 
 @FeignClient("chat")
 interface ChatClient {
-    @GetMapping("/messages")
-    fun getMessages(): List<MessageDto>
+    @GetMapping("/messages/")
+    fun getMessages(@RequestHeader("Username") username: String): List<MessageDto>
 
-    @PostMapping("/messages")
-    fun sendMessage(@RequestBody sendMessageDto: SendMessageDto): MessageDto
+    @PostMapping("/messages/")
+    fun sendMessage(@RequestHeader("Username") username: String, @RequestBody sendMessageDto: SendMessageDto): MessageDto
 }

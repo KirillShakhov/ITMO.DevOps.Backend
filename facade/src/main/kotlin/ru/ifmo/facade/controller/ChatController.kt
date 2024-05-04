@@ -15,12 +15,12 @@ class ChatController @Autowired constructor(
     private val chatClient: ChatClient
 ) {
     @GetMapping("/")
-    fun getMessages(): List<MessageDto> {
-        return chatClient.getMessages()
+    fun getMessages(@RequestAttribute("Username") username: String): List<MessageDto> {
+        return chatClient.getMessages(username)
     }
 
     @PostMapping("/")
-    fun sendMessage(@RequestBody sendMessageDto: SendMessageDto): MessageDto {
-        return chatClient.sendMessage(sendMessageDto)
+    fun sendMessage(@RequestAttribute("Username") username: String, @RequestBody sendMessageDto: SendMessageDto): MessageDto {
+        return chatClient.sendMessage(username, sendMessageDto)
     }
 }
