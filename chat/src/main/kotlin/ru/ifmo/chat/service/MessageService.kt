@@ -11,7 +11,7 @@ class MessageService @Autowired constructor(
     private val messageRepository: MessageRepository
 ) {
     fun findByUsername(username: String): List<Message> {
-        return messageRepository.findByRecipientOrUsername(username, username)
+        return messageRepository.findAllByRecipientOrUsername(username, username)
     }
 
     fun sendMessage(username: String, recipient: String, text: String, attachment: Int?): Message {

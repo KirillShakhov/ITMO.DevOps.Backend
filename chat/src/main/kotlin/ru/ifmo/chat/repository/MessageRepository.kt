@@ -6,6 +6,6 @@ import ru.ifmo.chat.model.Message
 
 @Repository
 interface MessageRepository : MongoRepository<Message, String> {
-    fun findByRecipientOrUsername(recipient: String, username: String): List<Message>
+    fun findAllByRecipientOrUsername(recipient: String, username: String): List<Message>
     fun save(message: Message): Message
 }
