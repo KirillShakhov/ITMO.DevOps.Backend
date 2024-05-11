@@ -7,7 +7,7 @@ import ru.ifmo.mediafiles.service.MediaFileService
 import ru.ifmo.commons.dto.MediaFileUpload
 
 @RestController
-@RequestMapping("/mediafiles")
+@RequestMapping("/files")
 class MediaFileController @Autowired constructor(
     private val mediaFileService: MediaFileService
 ) {
