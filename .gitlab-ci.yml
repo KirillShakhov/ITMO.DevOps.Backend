@@ -18,6 +18,7 @@ build-auth:
     paths:
       - auth/build/libs/*.jar
     expire_in: 1 week
+  parallel: 5
   only:
     - master
 
@@ -38,6 +39,7 @@ build-chat:
     paths:
       - chat/build/libs/*.jar
     expire_in: 1 week
+  parallel: 5
   only:
     - master
 
@@ -58,6 +60,7 @@ build-eureka:
     paths:
       - eureka/build/libs/*.jar
     expire_in: 1 week
+  parallel: 5
   only:
     - master
 
@@ -78,6 +81,7 @@ build-facade:
     paths:
       - facade/build/libs/*.jar
     expire_in: 1 week
+  parallel: 5
   only:
     - master
 
@@ -98,6 +102,7 @@ build-mediafiles:
     paths:
       - mediafiles/build/libs/*.jar
     expire_in: 1 week
+  parallel: 5
   only:
     - master
 
