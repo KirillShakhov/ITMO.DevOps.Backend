@@ -10,6 +10,26 @@ cache:
     - .gradle/wrapper
     - .gradle/caches
 
+builds:
+  stage: build
+  parallel: 5
+  script:
+    - ./gradlew auth:bootJar
+    - ./gradlew chat:bootJar
+    - ./gradlew eureka:bootJar
+    - ./gradlew facade:bootJar
+    - ./gradlew mediafiles:bootJar
+  artifacts:
+    paths:
+      - auth/build/libs/*.jar
+      - chat/build/libs/*.jar
+      - eureka/build/libs/*.jar
+      - facade/build/libs/*.jar
+      - mediafiles/build/libs/*.jar
+    expire_in: 1 week
+    only:
+      - master
+
 build-auth:
   stage: build
   script:
@@ -18,7 +38,6 @@ build-auth:
     paths:
       - auth/build/libs/*.jar
     expire_in: 1 week
-  parallel: 5
   only:
     - master
 
@@ -39,7 +58,6 @@ build-chat:
     paths:
       - chat/build/libs/*.jar
     expire_in: 1 week
-  parallel: 5
   only:
     - master
 
@@ -60,7 +78,6 @@ build-eureka:
     paths:
       - eureka/build/libs/*.jar
     expire_in: 1 week
-  parallel: 5
   only:
     - master
 
@@ -81,7 +98,6 @@ build-facade:
     paths:
       - facade/build/libs/*.jar
     expire_in: 1 week
-  parallel: 5
   only:
     - master
 
@@ -102,7 +118,6 @@ build-mediafiles:
     paths:
       - mediafiles/build/libs/*.jar
     expire_in: 1 week
-  parallel: 5
   only:
     - master
 
