@@ -1,40 +1,86 @@
-version: '3.3'
+version: '3.0'
+
 services:
   mongo:
-    ports:
-      - '27017:27017'
+    image: mongo
     container_name: mongo
     restart: always
+    ports:
+      - '27017:27017'
     logging:
       options:
         max-size: 1g
     environment:
       - MONGO_INITDB_ROOT_USERNAME=user
       - MONGO_INITDB_ROOT_PASSWORD=pass
-    image: mongo
+
   eureka-service:
-    hostname: eureka-service
     build:
       context: ./eureka
     container_name: eureka-service
+    ports:
+      - '8761:8761'
     networks:
       net:
         aliases:
           - eureka-service
+
   auth-service:
-    hostname: auth-service
     build:
       context: ./auth
     container_name: auth-service
     depends_on:
       - eureka-service
       - mongo
+    ports:
+      - '9992:9992'
     networks:
       net:
         aliases:
           - auth-service
+
+  mediafiles-service:
+    build:
+      context: ./mediafiles
+    container_name: mediafiles-service
+    depends_on:
+      - eureka-service
+      - mongo
     ports:
-      - '9992:9992'
+      - '9993:9993'
+    networks:
+      net:
+        aliases:
+          - mediafiles-service
+
+  chat-service:
+    build:
+      context: ./chat
+    container_name: chat-service
+    depends_on:
+      - eureka-service
+      - mongo
+    ports:
+      - '9994:9994'
+    networks:
+      net:
+        aliases:
+          - chat-service
+
+  facade-service:
+    build:
+      context: ./facade
+    container_name: facade-service
+    depends_on:
+      - auth-service
+      - mediafiles-service
+      - chat-service
+    ports:
+      - '8080:8080'
+    networks:
+      net:
+        aliases:
+          - facade-service
 
 networks:
   net:
