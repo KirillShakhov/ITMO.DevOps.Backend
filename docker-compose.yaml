@@ -82,6 +82,19 @@ services:
         aliases:
           - facade-service
 
+  frontend:
+    image: kirillshakhov/devops-frontend-image:1.0
+    pull_policy: never
+    container_name: frontend
+    environment:
+      - PORT=3000
+    networks:
+      - net
+    ports:
+      - '3000:3000'
+    depends_on:
+      - facade-service
+
 networks:
   net:
     driver: bridge
