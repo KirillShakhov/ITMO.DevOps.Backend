@@ -28,7 +28,7 @@ services:
     container_name: auth-service
     depends_on:
       - eureka-service
-      - mongodb
+      - mongo
     networks:
       net:
         aliases:
