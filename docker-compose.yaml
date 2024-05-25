@@ -83,8 +83,7 @@ services:
           - facade-service
 
   frontend:
-    image: kirillshakhov/devops-frontend-image:1.0
-    pull_policy: never
+    image: kirillshakhov/devops-frontend-image:1.1
     container_name: frontend
     environment:
       - PORT=3000
