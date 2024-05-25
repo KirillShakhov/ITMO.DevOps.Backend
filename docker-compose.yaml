@@ -1,4 +1,3 @@
-version: '3.0'
 
 services:
   mongo:
@@ -13,6 +12,10 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=user
       - MONGO_INITDB_ROOT_PASSWORD=pass
+    networks:
+      net:
+        aliases:
+          - mongo
 
   eureka-service:
     build:
@@ -83,7 +86,8 @@ services:
           - facade-service
 
   frontend:
-    image: kirillshakhov/devops-frontend-image:1.1
+    image: kirillshakhov/devops-frontend-image:1.3
+    pull_policy: always
     container_name: frontend
     environment:
       - PORT=3000
