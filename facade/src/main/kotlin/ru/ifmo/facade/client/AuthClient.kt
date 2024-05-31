@@ -9,7 +9,7 @@ import ru.ifmo.commons.dto.LoginRequest
 import ru.ifmo.commons.dto.RegisterDto
 
 
-@FeignClient("auth")
+@FeignClient("auth", url = "http://auth-service:9992")
 interface AuthClient {
     @PostMapping("/signin")
     fun authenticateUser(@RequestBody loginRequest: LoginRequest): AuthenticationResponse

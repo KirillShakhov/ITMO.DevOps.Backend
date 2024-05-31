@@ -17,25 +17,12 @@ services:
         aliases:
           - mongo
 
-  eureka-service:
-    build:
-      context: ./eureka
-    image: kirillshakhov/eureka-service:1.0
-    container_name: eureka-service
-    ports:
-      - '8761:8761'
-    networks:
-      net:
-        aliases:
-          - eureka-service
-
   auth-service:
     build:
       context: ./auth
     image: kirillshakhov/auth-service:1.0
     container_name: auth-service
     depends_on:
-      - eureka-service
       - mongo
     ports:
       - '9992:9992'
@@ -50,7 +37,6 @@ services:
     image: kirillshakhov/mediafiles-service:1.0
     container_name: mediafiles-service
     depends_on:
-      - eureka-service
       - mongo
     ports:
       - '9993:9993'
@@ -65,7 +51,6 @@ services:
     image: kirillshakhov/chat-service:1.0
     container_name: chat-service
     depends_on:
-      - eureka-service
       - mongo
     ports:
       - '9994:9994'

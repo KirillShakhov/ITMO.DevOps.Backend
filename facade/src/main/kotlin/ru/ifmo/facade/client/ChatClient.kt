@@ -7,7 +7,7 @@ import ru.ifmo.commons.dto.SendMessageDto
 import ru.ifmo.facade.config.FeignConfig
 
 
-@FeignClient("chat", configuration = [FeignConfig::class])
+@FeignClient("chat", url = "http://chat-service:9994", configuration = [FeignConfig::class])
 interface ChatClient {
     @GetMapping("/messages/")
     fun getMessages(): List<MessageDto>
