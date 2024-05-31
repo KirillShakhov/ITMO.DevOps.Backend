@@ -12,6 +12,7 @@ spec:
       labels:
         app: auth-service
     spec:
+      automountServiceAccountToken: false
       containers:
       - name: auth-service
         image: kirillshakhov/auth-service:1.0

@@ -12,6 +12,7 @@ spec:
       labels:
         app: mongo
     spec:
+      automountServiceAccountToken: false
       containers:
       - name: mongo
         image: mongo

@@ -12,6 +12,7 @@ spec:
       labels:
         app: facade-service
     spec:
+      automountServiceAccountToken: false
       containers:
       - name: facade-service
         image: kirillshakhov/facade-service:1.0

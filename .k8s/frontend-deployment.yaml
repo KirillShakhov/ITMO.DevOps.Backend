@@ -12,6 +12,7 @@ spec:
       labels:
         app: frontend
     spec:
+      automountServiceAccountToken: false
       containers:
       - name: frontend
         image: kirillshakhov/devops-frontend-image:1.6

@@ -12,6 +12,7 @@ spec:
       labels:
         app: chat-service
     spec:
+      automountServiceAccountToken: false
       containers:
       - name: chat-service
         image: kirillshakhov/chat-service:1.0

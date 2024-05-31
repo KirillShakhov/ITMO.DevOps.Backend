@@ -12,6 +12,7 @@ spec:
       labels:
         app: mediafiles-service
     spec:
+      automountServiceAccountToken: false
       containers:
       - name: mediafiles-service
         image: kirillshakhov/mediafiles-service:1.0
