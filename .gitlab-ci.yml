@@ -90,8 +90,8 @@ test-mediafiles:
 docker-build-auth:
   stage: docker-build
   script:
-    - docker build -t auth-service:$CI_COMMIT_REF_NAME auth/
-    - docker push auth-service:$CI_COMMIT_REF_NAME
+    - docker build -t kirillshakhov/auth-service:$CI_COMMIT_REF_NAME auth/
+    - docker push kirillshakhov/auth-service:$CI_COMMIT_REF_NAME
   only:
     - master
   dependencies:
@@ -100,8 +100,8 @@ docker-build-auth:
 docker-build-chat:
   stage: docker-build
   script:
-    - docker build -t chat-service:$CI_COMMIT_REF_NAME chat/
-    - docker push chat-service:$CI_COMMIT_REF_NAME
+    - docker build -t kirillshakhov/chat-service:$CI_COMMIT_REF_NAME chat/
+    - docker push kirillshakhov/chat-service:$CI_COMMIT_REF_NAME
   only:
     - master
   dependencies:
@@ -110,8 +110,8 @@ docker-build-chat:
 docker-build-facade:
   stage: docker-build
   script:
-    - docker build -t facade-service:$CI_COMMIT_REF_NAME facade/
-    - docker push facade-service:$CI_COMMIT_REF_NAME
+    - docker build -t kirillshakhov/facade-service:$CI_COMMIT_REF_NAME facade/
+    - docker push kirillshakhov/facade-service:$CI_COMMIT_REF_NAME
   only:
     - master
   dependencies:
@@ -120,8 +120,8 @@ docker-build-facade:
 docker-build-mediafiles:
   stage: docker-build
   script:
-    - docker build -t mediafiles-service:$CI_COMMIT_REF_NAME mediafiles/
-    - docker push mediafiles-service:$CI_COMMIT_REF_NAME
+    - docker build -t kirillshakhov/mediafiles-service:$CI_COMMIT_REF_NAME mediafiles/
+    - docker push kirillshakhov/mediafiles-service:$CI_COMMIT_REF_NAME
   only:
     - master
   dependencies:
