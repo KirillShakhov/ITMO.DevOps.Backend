@@ -3,6 +3,7 @@ stages:
   - test
 
 before_script:
+  - docker info
   - export GRADLE_USER_HOME=`pwd`/.gradle
 
 build-auth:
