@@ -23,7 +23,6 @@ test-auth:
   stage: test
   script:
     - ./gradlew auth:test
-    - ls -l test/build/libs/
   needs:
     - build-auth
   only:
