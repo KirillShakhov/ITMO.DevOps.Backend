@@ -1,6 +1,7 @@
 stages:
   - build
   - test
+  - docker-build
 
 before_script:
   - docker info
@@ -46,26 +47,6 @@ test-chat:
   only:
     - master
 
-build-eureka:
-  stage: build
-  script:
-    - ./gradlew eureka:bootJar
-  artifacts:
-    paths:
-      - eureka/build/libs/*.jar
-    expire_in: 1 week
-  only:
-    - master
-
-test-eureka:
-  stage: test
-  script:
-    - ./gradlew eureka:test
-  needs:
-    - build-eureka
-  only:
-    - master
-
 build-facade:
   stage: build
   script:
@@ -105,6 +86,46 @@ test-mediafiles:
     - build-mediafiles
   only:
     - master
+
+docker-build-auth:
+  stage: docker-build
+  script:
+    - docker build -t auth-service:$CI_COMMIT_REF_NAME auth/
+    - docker push auth-service:$CI_COMMIT_REF_NAME
+  only:
+    - master
+  dependencies:
+    - test-auth
+
+docker-build-chat:
+  stage: docker-build
+  script:
+    - docker build -t chat-service:$CI_COMMIT_REF_NAME chat/
+    - docker push chat-service:$CI_COMMIT_REF_NAME
+  only:
+    - master
+  dependencies:
+    - test-chat
+
+docker-build-facade:
+  stage: docker-build
+  script:
+    - docker build -t facade-service:$CI_COMMIT_REF_NAME facade/
+    - docker push facade-service:$CI_COMMIT_REF_NAME
+  only:
+    - master
+  dependencies:
+    - test-facade
+
+docker-build-mediafiles:
+  stage: docker-build
+  script:
+    - docker build -t mediafiles-service:$CI_COMMIT_REF_NAME mediafiles/
+    - docker push mediafiles-service:$CI_COMMIT_REF_NAME
+  only:
+    - master
+  dependencies:
+    - test-mediafiles
 
 after_script:
   - echo "End CI"
