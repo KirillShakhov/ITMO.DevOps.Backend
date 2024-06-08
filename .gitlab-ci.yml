@@ -11,6 +11,7 @@ build-auth:
   stage: build
   script:
     - ./gradlew auth:bootJar
+    - ls -l auth/build/libs/
   artifacts:
     paths:
       - auth/build/libs/*.jar
@@ -22,6 +23,7 @@ test-auth:
   stage: test
   script:
     - ./gradlew auth:test
+    - ls -l test/build/libs/
   needs:
     - build-auth
   only:
@@ -31,6 +33,7 @@ build-chat:
   stage: build
   script:
     - ./gradlew chat:bootJar
+    - ls -l chat/build/libs/
   artifacts:
     paths:
       - chat/build/libs/*.jar
@@ -51,6 +54,7 @@ build-facade:
   stage: build
   script:
     - ./gradlew facade:bootJar
+    - ls -l facade/build/libs/
   artifacts:
     paths:
       - facade/build/libs/*.jar
@@ -71,6 +75,7 @@ build-mediafiles:
   stage: build
   script:
     - ./gradlew mediafiles:bootJar
+    - ls -l mediafiles/build/libs/
   artifacts:
     paths:
       - mediafiles/build/libs/*.jar
