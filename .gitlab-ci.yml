@@ -132,8 +132,8 @@ docker-build-auth:
   script:
     - cd auth
     - ls
-    - docker build -t kirillshakhov/auth-service:$CI_COMMIT_TAG .
-    - docker push kirillshakhov/auth-service:$CI_COMMIT_TAG
+    - docker build -t kirillshakhov/auth-service:$TAG .
+    - docker push kirillshakhov/auth-service:$TAG
   only:
     - master
   dependencies:
@@ -144,8 +144,8 @@ docker-build-chat:
   script:
     - cd chat
     - ls
-    - docker build -t kirillshakhov/chat-service:$CI_COMMIT_TAG .
-    - docker push kirillshakhov/chat-service:$CI_COMMIT_TAG
+    - docker build -t kirillshakhov/chat-service:$TAG .
+    - docker push kirillshakhov/chat-service:$TAG
   only:
     - master
   dependencies:
@@ -156,8 +156,8 @@ docker-build-facade:
   script:
     - cd facade
     - ls
-    - docker build -t kirillshakhov/facade-service:$CI_COMMIT_TAG .
-    - docker push kirillshakhov/facade-service:$CI_COMMIT_TAG
+    - docker build -t kirillshakhov/facade-service:$TAG .
+    - docker push kirillshakhov/facade-service:$TAG
   only:
     - master
   dependencies:
@@ -168,8 +168,8 @@ docker-build-mediafiles:
   script:
     - cd mediafiles
     - ls
-    - docker build -t kirillshakhov/mediafiles-service:$CI_COMMIT_TAG .
-    - docker push kirillshakhov/mediafiles-service:$CI_COMMIT_TAG
+    - docker build -t kirillshakhov/mediafiles-service:$TAG .
+    - docker push kirillshakhov/mediafiles-service:$TAG
   only:
     - master
   dependencies:
