@@ -176,4 +176,4 @@ docker-build-mediafiles:
     - build-mediafiles
 
 after_script:
-  - echo "End CI"
+  - echo "//////////////// End CI ////////////////"
