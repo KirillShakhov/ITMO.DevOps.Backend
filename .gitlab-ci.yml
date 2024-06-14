@@ -132,48 +132,48 @@ docker-build-auth:
   script:
     - cd auth
     - ls
-    - docker build -t kirillshakhov/auth-service:$CI_COMMIT_REF_NAME .
-    - docker push kirillshakhov/auth-service:$CI_COMMIT_REF_NAME
+    - docker build -t kirillshakhov/auth-service:$TAG .
+    - docker push kirillshakhov/auth-service:$TAG
   only:
     - master
   dependencies:
-    - test-auth
+    - build-auth
 
 docker-build-chat:
   stage: docker-build
   script:
     - cd chat
     - ls
-    - docker build -t kirillshakhov/chat-service:$CI_COMMIT_REF_NAME .
-    - docker push kirillshakhov/chat-service:$CI_COMMIT_REF_NAME
+    - docker build -t kirillshakhov/chat-service:$TAG .
+    - docker push kirillshakhov/chat-service:$TAG
   only:
     - master
   dependencies:
-    - test-chat
+    - build-chat
 
 docker-build-facade:
   stage: docker-build
   script:
     - cd facade
     - ls
-    - docker build -t kirillshakhov/facade-service:$CI_COMMIT_REF_NAME .
-    - docker push kirillshakhov/facade-service:$CI_COMMIT_REF_NAME
+    - docker build -t kirillshakhov/facade-service:$TAG .
+    - docker push kirillshakhov/facade-service:$TAG
   only:
     - master
   dependencies:
-    - test-facade
+    - build-facade
 
 docker-build-mediafiles:
   stage: docker-build
   script:
     - cd mediafiles
     - ls
-    - docker build -t kirillshakhov/mediafiles-service:$CI_COMMIT_REF_NAME .
-    - docker push kirillshakhov/mediafiles-service:$CI_COMMIT_REF_NAME
+    - docker build -t kirillshakhov/mediafiles-service:$TAG .
+    - docker push kirillshakhov/mediafiles-service:$TAG
   only:
     - master
   dependencies:
-    - test-mediafiles
+    - build-mediafiles
 
 after_script:
-  - echo "End CI"
+  - echo "//////////////// End CI ////////////////"
