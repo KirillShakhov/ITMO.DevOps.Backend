@@ -76,11 +76,10 @@ services:
           - facade-service
 
   frontend:
-    image: kirillshakhov/devops-frontend-image:1.6
+    image: kirillshakhov/devops-frontend-image:1.5
     pull_policy: always
     container_name: frontend
     environment:
-      - PORT=3000
       - REACT_APP_API_URL=http://158.160.68.164:8080
     networks:
       - net
