@@ -137,7 +137,7 @@ docker-build-auth:
   only:
     - master
   dependencies:
-    - test-auth
+    - build-auth
 
 docker-build-chat:
   stage: docker-build
