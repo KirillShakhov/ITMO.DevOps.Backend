@@ -21,4 +21,15 @@ class MediaFileController @Autowired constructor(
         val savedMediaFile = mediaFileService.saveMediaFile(username, mediaFileUpload.type, mediaFileUpload.base64)
         return ResponseEntity.ok(savedMediaFile)
     }
+
+    @GetMapping("/")
+    fun getMediaFileByUsername(@RequestHeader("Username") username: String): ResponseEntity<*> {
+        return ResponseEntity.ok(mediaFileService.findMediaFileByUsername(username))
+    }
+
+    @PostMapping("/")
+    fun saveMediaFile(@RequestHeader("Username") username: String, @RequestBody mediaFileUpload: MediaFileUpload): ResponseEntity<*> {
+        val savedMediaFile = mediaFileService.saveMediaFile(username, mediaFileUpload.type, mediaFileUpload.base64)
+        return ResponseEntity.ok(savedMediaFile)
+    }
 }
