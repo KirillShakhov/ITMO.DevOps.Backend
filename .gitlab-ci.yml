@@ -149,7 +149,7 @@ docker-build-chat:
   only:
     - master
   dependencies:
-    - test-chat
+    - build-chat
 
 docker-build-facade:
   stage: docker-build
@@ -161,7 +161,7 @@ docker-build-facade:
   only:
     - master
   dependencies:
-    - test-facade
+    - build-facade
 
 docker-build-mediafiles:
   stage: docker-build
@@ -173,7 +173,7 @@ docker-build-mediafiles:
   only:
     - master
   dependencies:
-    - test-mediafiles
+    - build-mediafiles
 
 after_script:
   - echo "End CI"
