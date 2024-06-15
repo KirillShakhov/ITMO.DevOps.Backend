@@ -46,8 +46,8 @@ tasks.named('test') {
 
 sonar {
     properties {
-        property "sonar.projectKey", "KirillShakhov_devops.labs_e4d8f3bf-c568-4b24-9466-7b96491a4d8e"
-        property "sonar.projectName", "DevOps.Labs"
+        property "sonar.projectKey", "devops"
+        property "sonar.projectName", "devops"
         property "sonar.qualitygate.wait", true
     }
 }
