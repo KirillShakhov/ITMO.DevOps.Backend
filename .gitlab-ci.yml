@@ -132,7 +132,7 @@ docker-build-auth:
   script:
     - cd auth
     - ls
-    - docker build -t kirillshakhov/auth-service:$CI_COMMIT_SHORT_SHA .
+    - docker build --platform linux/arm64 -t kirillshakhov/auth-service:$CI_COMMIT_SHORT_SHA .
     - docker push kirillshakhov/auth-service:$CI_COMMIT_SHORT_SHA
   only:
     - master
@@ -144,7 +144,7 @@ docker-build-chat:
   script:
     - cd chat
     - ls
-    - docker build -t kirillshakhov/chat-service:$CI_COMMIT_SHORT_SHA .
+    - docker build --platform linux/arm64 -t kirillshakhov/chat-service:$CI_COMMIT_SHORT_SHA .
     - docker push kirillshakhov/chat-service:$CI_COMMIT_SHORT_SHA
   only:
     - master
@@ -156,7 +156,7 @@ docker-build-facade:
   script:
     - cd facade
     - ls
-    - docker build -t kirillshakhov/facade-service:$CI_COMMIT_SHORT_SHA .
+    - docker build --platform linux/arm64 -t kirillshakhov/facade-service:$CI_COMMIT_SHORT_SHA .
     - docker push kirillshakhov/facade-service:$CI_COMMIT_SHORT_SHA
   only:
     - master
@@ -168,7 +168,7 @@ docker-build-mediafiles:
   script:
     - cd mediafiles
     - ls
-    - docker build -t kirillshakhov/mediafiles-service:$CI_COMMIT_SHORT_SHA .
+    - docker build --platform linux/arm64 -t kirillshakhov/mediafiles-service:$CI_COMMIT_SHORT_SHA .
     - docker push kirillshakhov/mediafiles-service:$CI_COMMIT_SHORT_SHA
   only:
     - master
