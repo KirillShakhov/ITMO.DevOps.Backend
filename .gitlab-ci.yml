@@ -37,7 +37,7 @@ sonarqube-check:
     - master
     - main
     - develop
-  needs:
+  dependencies:
     - tests
 
 build-chat:
