@@ -24,4 +24,10 @@ class MessageController @Autowired constructor(
         val message = messageService.sendMessage(username, sendMessageDto.recipient, sendMessageDto.text, sendMessageDto.attachment)
         return MessageDto(message.id, message.username, message.recipient, message.text, message.attachment, message.createdDate);
     }
+
+    @GetMapping("/{id}")
+    fun getMessageById(@PathVariable id: String, @RequestHeader username: String): String {
+        val message = messageService.findById(id).orElseThrow { RuntimeException("Message not found") }
+        return "Message from ${message.username} to ${message.recipient}: ${message.text}"
+    }
 }

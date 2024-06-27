@@ -1,4 +1,4 @@
-package ru.ifmo.chat
+package ru.ifmo.chat.controller
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.junit.jupiter.api.Test
@@ -11,10 +11,9 @@ import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
-import ru.ifmo.chat.controller.MessageController
+import ru.ifmo.chat.model.Message
 import ru.ifmo.chat.service.MessageService
 import ru.ifmo.commons.dto.SendMessageDto
-import ru.ifmo.chat.model.Message
 import java.util.*
 
 @WebMvcTest(MessageController::class)
@@ -71,5 +70,29 @@ class MessageControllerTest {
             .andExpect(jsonPath("$.username").value(message.username))
             .andExpect(jsonPath("$.recipient").value(message.recipient))
             .andExpect(jsonPath("$.text").value(message.text))
+    }
+
+    @Test
+    fun `should get message by id`() {
+        val username = "testuser"
+        val message = Message("1", username, "recipient1", "Hello", null, Date())
+
+        Mockito.`when`(messageService.findById("1")).thenReturn(Optional.of(message))
+
+        mockMvc.perform(get("/messages/1")
+            .header("username", username))
+            .andExpect(status().isOk)
+            .andExpect(content().string("Message from ${message.username} to ${message.recipient}: ${message.text}"))
+    }
+
+    @Test
+    fun `should return error when message not found`() {
+        val username = "testuser"
+
+        Mockito.`when`(messageService.findById("1")).thenReturn(Optional.empty())
+
+        mockMvc.perform(get("/messages/1")
+            .header("username", username))
+            .andExpect(status().isNotFound)
     }
 }
