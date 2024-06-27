@@ -1,6 +1,7 @@
-package ru.ifmo.chat.controller
+package ru.ifmo.chat
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import org.hamcrest.CoreMatchers.containsString
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito
 import org.springframework.beans.factory.annotation.Autowired
@@ -11,9 +12,10 @@ import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
-import ru.ifmo.chat.model.Message
+import ru.ifmo.chat.controller.MessageController
 import ru.ifmo.chat.service.MessageService
 import ru.ifmo.commons.dto.SendMessageDto
+import ru.ifmo.chat.model.Message
 import java.util.*
 
 @WebMvcTest(MessageController::class)
@@ -94,5 +96,6 @@ class MessageControllerTest {
         mockMvc.perform(get("/messages/1")
             .header("username", username))
             .andExpect(status().isNotFound)
+            .andExpect(status().reason(containsString("Message not found")))
     }
 }
