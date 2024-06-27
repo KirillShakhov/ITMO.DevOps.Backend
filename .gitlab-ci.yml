@@ -1,7 +1,6 @@
 stages:
   - test
   - sonarqube-check
-  - sonarqube-vulnerability-report
   - build
   - docker-build
 
@@ -31,7 +30,6 @@ sonarqube-check:
     paths:
       - .sonar/cache
   script:
-    - ./gradlew test
     - ./gradlew sonar
   allow_failure: true
   only:
@@ -40,24 +38,7 @@ sonarqube-check:
     - main
     - develop
   needs:
-    - all-tests
-
-sonarqube-vulnerability-report:
-  stage: sonarqube-vulnerability-report
-  script:
-    - 'curl -u "${SONAR_TOKEN}:" "${SONAR_HOST_URL}/api/issues/gitlab_sast_export?projectKey=devops&branch=${CI_COMMIT_BRANCH}&pullRequest=${CI_MERGE_REQUEST_IID}" -o gl-sast-sonar-report.json'
-  allow_failure: true
-  only:
-    - merge_requests
-    - master
-    - main
-    - develop
-  artifacts:
-    expire_in: 1 day
-    reports:
-      sast: gl-sast-sonar-report.json
-  dependencies:
-    - sonarqube-check
+    - tests
 
 build-chat:
   stage: build
@@ -95,7 +76,7 @@ build-mediafiles:
   only:
     - master
 
-all-tests:
+tests:
   stage: test
   script:
     - ./gradlew test

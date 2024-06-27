@@ -18,8 +18,4 @@ class MessageService @Autowired constructor(
         val message = Message(null, username, recipient, text, attachment, Date());
         return messageRepository.save(message);
     }
-
-    fun findById(id: String): Optional<Message> {
-        return messageRepository.findById(id);
-    }
 }
