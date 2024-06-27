@@ -51,3 +51,15 @@ sonar {
         property "sonar.qualitygate.wait", true
     }
 }
+
+subprojects {
+    version = '1.0'
+    sonarqube {
+        properties {
+            property "sonar.sources", "src/main"
+            property "sonar.tests", "src/test"
+            // I was testing with JaCoCo, so the next line is not needed if you're using some other tool
+            property "sonar.coverage.jacoco.xmlReportPaths", "../build/reports/jacoco/codeCoverageReport/codeCoverageReport.xml"
+        }
+    }
+}
