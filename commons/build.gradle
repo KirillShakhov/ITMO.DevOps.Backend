@@ -1,5 +1,6 @@
 plugins {
     id 'org.jetbrains.kotlin.jvm'
+    id 'jacoco'
 }
 
 group = 'ru.ifmo'
@@ -18,4 +19,17 @@ test {
 }
 kotlin {
     jvmToolchain(17)
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.required = true
+        csv.required = false
+        html.outputLocation = file("${buildDir}/jacocoHtml")
+    }
+}
+
+tasks.test {
+    finalizedBy jacocoTestReport
 }

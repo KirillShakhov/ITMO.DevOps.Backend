@@ -1,8 +1,8 @@
 stages:
+  - test
   - sonarqube-check
   - sonarqube-vulnerability-report
   - build
-  - test
   - docker-build
 
 before_script:
@@ -37,6 +37,8 @@ sonarqube-check:
     - master
     - main
     - develop
+  needs:
+    - all-tests
 
 sonarqube-vulnerability-report:
   stage: sonarqube-vulnerability-report
@@ -55,15 +57,6 @@ sonarqube-vulnerability-report:
   dependencies:
     - sonarqube-check
 
-test-auth:
-  stage: test
-  script:
-    - ./gradlew auth:test
-  needs:
-    - build-auth
-  only:
-    - master
-
 build-chat:
   stage: build
   script:
@@ -73,15 +66,6 @@ build-chat:
     paths:
       - chat/build/libs/*.jar
     expire_in: 1 week
-  only:
-    - master
-
-test-chat:
-  stage: test
-  script:
-    - ./gradlew chat:test
-  needs:
-    - build-chat
   only:
     - master
 
@@ -97,15 +81,6 @@ build-facade:
   only:
     - master
 
-test-facade:
-  stage: test
-  script:
-    - ./gradlew facade:test
-  needs:
-    - build-facade
-  only:
-    - master
-
 build-mediafiles:
   stage: build
   script:
@@ -118,12 +93,10 @@ build-mediafiles:
   only:
     - master
 
-test-mediafiles:
+all-tests:
   stage: test
   script:
-    - ./gradlew mediafiles:test
-  needs:
-    - build-mediafiles
+    - ./gradlew test
   only:
     - master
 
